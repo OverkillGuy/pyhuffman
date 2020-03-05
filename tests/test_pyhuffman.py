@@ -8,7 +8,7 @@ def test_simple_huffman():
     # When building a huffman table
     table = huffman_table(symbol_table)
     # Then table makes sense
-    assert table == 2, "Didn't even succeed at building a dumb table"
+    assert table == {"1001": "0"}, "Table for single symbol should be binary zero"
 
 
 # Scenario: Sample huffman table building
