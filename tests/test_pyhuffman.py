@@ -16,3 +16,8 @@ def test_example_huffman_table():
     """ From MIT course example"""
     # Given a symbol table of "{(A, 1/3)  (B, 1/2)  (C, 1/12)  (D, 1/12)}"
     symbols = {"A": 1 / 3.0, "B": 1 / 2.0, "C": 1 / 12.0, "D": 1 / 12.0}
+    # When computing huffman table
+    table = huffman_table(symbols)
+    # Then the result is "{B: 0, A: 10, C: 110, D: 1110}"
+    expected_table = {"B": "0", "A": "10", "C": "110", "D": "1110"}
+    assert table == {}, "Incorrect table for sample problem"
