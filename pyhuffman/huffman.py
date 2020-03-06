@@ -24,13 +24,23 @@ def huffman_table(symbols_probas: SymbolTable) -> Encoding:
 
 def huffman_encode(message: str, table: Encoding) -> str:
     """ Encode a message with huffman encoding"""
-    return [table[c] for c in message]
+    return "".join([table[c] for c in message])
 
 
 def huffman_decode(encoded: str, table: Encoding) -> str:
     """ Decode a message encoded with huffman"""
     reversed_table = {v: k for k, v in table.items()}
-    return "".join([reversed_table[c] for c in encoded])
+    acc = encoded
+    decoded = []
+    while acc:  # Find symbol based on 0 delimiter
+        current_index = 0
+        while acc[current_index] != "0":
+            current_index += 1
+        # found a 0: read that symbol string and pop it off the buffer
+        symbol = acc[: current_index + 1]
+        decoded.append(reversed_table[symbol])
+        acc = acc[current_index + 1 :]
+    return "".join(decoded)
 
 
 def equiprobable_table(sample_message: str) -> SymbolTable:
