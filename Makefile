@@ -7,3 +7,6 @@ test:
 
 format:
 	poetry run black pyhuffman/ tests/
+
+lint:
+	poetry run mypy pyhuffman/ tests/

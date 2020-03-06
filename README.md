@@ -33,6 +33,14 @@ Or try to use the implementation as a library (TBD)
 	>>> import pyhuffman
 	>>> # [TBD steps]
 
-You can runn the code formatter via
+You can run the code formatter via
 
 	make format
+
+and run the python linter `mypy` (checks type):
+
+	make lint
+
+We recommend you run them all in one go as a matter of routine:
+
+	make format lint test

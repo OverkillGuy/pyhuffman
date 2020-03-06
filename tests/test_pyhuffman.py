@@ -1,4 +1,3 @@
-import pytest
 from pyhuffman import huffman
 
 # Scenario: Sample huffman table building
