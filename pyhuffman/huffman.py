@@ -11,12 +11,15 @@ def huffman_table(symbols_probas: SymbolTable) -> Encoding:
     """ Computes the huffman encoding table for given symbols/proba pairs"""
     encoding_order = []
     symbols_acc = symbols_probas
-    while symbols_probas:
-        # Pick highest
+    while symbols_probas:  # Pick off highest probability until exhaustion
         lowest_probability_symbol = max(symbols_acc, key=symbols_acc.get)
         del symbols_acc[lowest_probability_symbol]
         encoding_order.append(lowest_probability_symbol)
     encoding = {}
+    # Most likely symbol gets shortest encoding (0), and each
+    # less-likely symbol after gets more and more 1s = longer to spell
+    # out. 0 can be seen as "reserved for symbol-delimiter", see
+    # decoding function
     for n, symbol in enumerate(encoding_order):
         encoding[symbol] = (n * "1") + "0"
     return encoding
@@ -24,27 +27,31 @@ def huffman_table(symbols_probas: SymbolTable) -> Encoding:
 
 def huffman_encode(message: str, table: Encoding) -> str:
     """ Encode a message with huffman encoding"""
+    # just a lookup table, really
     return "".join([table[c] for c in message])
 
 
 def huffman_decode(encoded: str, table: Encoding) -> str:
     """ Decode a message encoded with huffman"""
+    # will want encoded-to-decoded lookup table
+    # = reverse the decoded-to-encoded table
     reversed_table = {v: k for k, v in table.items()}
-    acc = encoded
+    acc = encoded  # copy the structure we'll be iterating over
     decoded = []
-    while acc:  # Find symbol based on 0 delimiter
+    while acc:
+        # Find symbol based on 0 as delimiter:
         current_index = 0
         while acc[current_index] != "0":
             current_index += 1
-        # found a 0: read that symbol string and pop it off the buffer
-        symbol = acc[: current_index + 1]
-        decoded.append(reversed_table[symbol])
-        acc = acc[current_index + 1 :]
-    return "".join(decoded)
+        # found a 0 = a whole symbol
+        symbol = acc[: current_index + 1]  # read that symbol
+        decoded.append(reversed_table[symbol])  # decode it
+        acc = acc[current_index + 1 :]  # and pop it off the accumulator
+    return "".join(decoded)  # concatenate array-of-char to proper string
 
 
 def equiprobable_table(sample_message: str) -> SymbolTable:
-    """Generate a huffman symbol table using a superdumb heuristic
+    """Generate a huffman symbol table using a naive heuristic
 
     Heuristic is to assume that characters are all equally likely to
     occur in given message
