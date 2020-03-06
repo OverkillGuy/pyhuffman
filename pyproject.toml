@@ -1,8 +1,9 @@
 [tool.poetry]
 name = "pyhuffman"
 version = "0.1.0"
-description = ""
+description = "A Huffman coding implementation for learning purposes using Python best-practices"
 authors = ["Jb DOYON <jb@jiby.tech>"]
+license = "GPL-3.0-or-later"
 
 [tool.poetry.dependencies]
 python = "^3.7"

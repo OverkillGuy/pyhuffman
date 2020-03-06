@@ -49,3 +49,7 @@ We recommend you run them all in one go as a matter of routine:
 	make format lint test
 	# conveniently aliased as:
 	make
+
+## License
+
+GPL v3 (or later) license is used. See `LICENCE.txt` for details.
