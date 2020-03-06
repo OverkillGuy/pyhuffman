@@ -24,3 +24,22 @@ def test_encode_decode_ok():
     decoded = huffman.huffman_decode(encoded, table)
     # Then the decoded message is the original
     assert decoded == msg, "Decoding an encoded message should return original"
+
+
+# Scenario: Better heuristic gives better performance
+def test_better_heuristics_better_performance():
+    # Given a lorem ipsum text to encode
+    msg = """Nullam eu ante vel est convallis dignissim. Donec vitae
+    dolor. Lorem ipsum dolor sit amet, consectetuer adipiscing
+    elit. Pellentesque dapibus suscipit ligula. Nullam tristique
+    diam non turpis."""
+    # When huffman encoding with naive table heuristic
+    naive_table = huffman.huffman_table(huffman.equiprobable_table(msg))
+    naive_encoding = huffman.huffman_encode(msg, naive_table)
+    # And huffman encoding with character-frequency heuristic
+    charfreq_table = huffman.huffman_table(huffman.charcounter_table(msg))
+    charfreq_encoding = huffman.huffman_encode(msg, charfreq_table)
+    # Then the character frequency heuristic's message is much shorter
+    assert len(charfreq_encoding) < len(
+        naive_encoding
+    ), "Naive encoding shouldn't win here"

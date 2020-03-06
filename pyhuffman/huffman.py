@@ -55,4 +55,11 @@ def equiprobable_table(sample_message: str) -> SymbolTable:
 
 
 def charcounter_table(sample_message: str) -> SymbolTable:
-    pass
+    """Generate a huffman symbol table using a char-frequency heuristic
+
+    Using character frequency to figure out how probable a character is
+    """
+    from collections import Counter
+
+    # Counter returns a custom object mapping item to item-frequency in a collection
+    return dict(Counter(sample_message))
