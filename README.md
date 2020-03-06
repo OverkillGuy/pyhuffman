@@ -5,10 +5,17 @@ A Python program implementing Huffman coding for learning purposes using Python 
 Done after reading Chapter 1 of the [MIT Digital Communications online course](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-02-introduction-to-eecs-ii-digital-communication-systems-fall-2012/)), which made me want to build Huffman coding for real.
 
 ## Dependencies
-- Python 3
-- [Poetry](https://python-poetry.org/) for package management
-- [Pytest](https://pytest.org/) for testing
-- [black](https://black.readthedocs.io/en/stable/) python formatter
+This project depends on the following packages:
+- Python 3.7 (use of Typing library)
+- [poetry](https://python-poetry.org/), to manage packages (listing dependencies and creating my own package)
+Additionally, the following are development-only dependencies:
+- [pytest](https://pytest.org/), for testing
+- [black](https://black.readthedocs.io/en/stable/), code formatter
+- [pylint](https://www.pylint.org/), generic python code linter
+- [mypy](https://mypy.readthedocs.io/en/latest/), python type checker
+- [isort](https://timothycrosley.github.io/isort/), sort import
+
+To see dependencies in more detail, have a look in the `pyproject.toml` file.
 
 ## Installation
 
@@ -40,7 +47,7 @@ The code formatter can be run via
 
 	make format
 
-and the python linter `mypy` (checks type errors):
+and the python linters are all available via:
 
 	make lint
 
