@@ -1,4 +1,6 @@
 
+all: install format lint test
+
 install:
 	poetry install
 

@@ -44,3 +44,5 @@ and run the python linter `mypy` (checks type):
 We recommend you run them all in one go as a matter of routine:
 
 	make format lint test
+	# conveniently aliased as:
+	make
