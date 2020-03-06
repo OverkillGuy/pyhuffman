@@ -8,7 +8,9 @@ test:
 	poetry run pytest
 
 format:
-	poetry run black pyhuffman/ tests/
+	poetry run black src/ tests/
 
-lint:
-	poetry run mypy pyhuffman/ tests/
+lint: mypy
+
+mypy:
+	poetry run mypy src/ tests/
