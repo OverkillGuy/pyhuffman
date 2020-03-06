@@ -1,1 +1,3 @@
-__version__ = "0.1.0"
+"""
+A toy implementation of Huffman coding.
+"""

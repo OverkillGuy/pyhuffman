@@ -1,8 +1,15 @@
+"""
+Simple tests for huffman encoding
+"""
+
 from pyhuffman import huffman
 
-# Scenario: Sample huffman table building
+
 def test_example_huffman_table():
-    """ From MIT course example"""
+    """Scenario: Sample huffman table building
+
+    Sample message taken from MIT course example
+    """
     # Given a symbol table of "{(A, 1/3)  (B, 1/2)  (C, 1/12)  (D, 1/12)}"
     symbols = {"A": 1 / 3.0, "B": 1 / 2.0, "C": 1 / 12.0, "D": 1 / 12.0}
     # When computing huffman table
@@ -12,8 +19,8 @@ def test_example_huffman_table():
     assert table == expected_table, "Incorrect table for sample problem"
 
 
-# Scenario: Symmetric encoding and decoding
 def test_encode_decode_ok():
+    """Scenario: Symmetric encoding and decoding"""
     # Given a message to encode
     msg = "Super secret message"
     # And a sample encoding table
@@ -26,8 +33,8 @@ def test_encode_decode_ok():
     assert decoded == msg, "Decoding an encoded message should return original"
 
 
-# Scenario: Better heuristic gives better performance
 def test_better_heuristics_better_performance():
+    """Scenario: Better heuristic gives better performance"""
     # Given a lorem ipsum text to encode
     msg = """Nullam eu ante vel est convallis dignissim. Donec vitae
     dolor. Lorem ipsum dolor sit amet, consectetuer adipiscing

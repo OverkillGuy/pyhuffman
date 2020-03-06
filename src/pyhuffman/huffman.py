@@ -1,4 +1,9 @@
-from typing import Dict, Optional
+"""
+Huffman encoding implementation
+"""
+
+from collections import Counter
+from typing import Dict
 
 # Pairs of symbol and their probability of occurence
 SymbolTable = Dict[str, float]
@@ -20,8 +25,8 @@ def huffman_table(symbols_probas: SymbolTable) -> Encoding:
     # less-likely symbol after gets more and more 1s = longer to spell
     # out. 0 can be seen as "reserved for symbol-delimiter", see
     # decoding function
-    for n, symbol in enumerate(encoding_order):
-        encoding[symbol] = (n * "1") + "0"
+    for index, symbol in enumerate(encoding_order):
+        encoding[symbol] = (index * "1") + "0"
     return encoding
 
 
@@ -66,7 +71,6 @@ def charcounter_table(sample_message: str) -> SymbolTable:
 
     Using character frequency to figure out how probable a character is
     """
-    from collections import Counter
 
     # Counter returns a custom object mapping item to item-frequency in a collection
     return dict(Counter(sample_message))
