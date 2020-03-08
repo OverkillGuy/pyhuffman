@@ -10,7 +10,7 @@ test:
 format:
 	poetry run black src/ tests/
 
-lint: mypy pylint isort
+lint: isort mypy pylint
 
 mypy:
 	poetry run mypy src/ tests/
