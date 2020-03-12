@@ -75,13 +75,18 @@ def charcounter_table(sample_message: str) -> SymbolTable:
     # Counter returns a custom object mapping item to item-frequency in a collection
     return dict(Counter(sample_message))
 
+
 def encode_padded(msg: str, table: Encoding) -> str:
     """Counterpart of encode padding until byte alignment"""
-    _ = table
-    return msg  # TODO: Implement this
+    encoded = huffman_encode(msg, table)
+    # Number of bits the incomplete byte will have
+    encoded_leftover_byte = len(encoded) % 8
+    n_padding = 8 - encoded_leftover_byte
+    # We pad with ones, since the "symbol-delimiter" is 0
+    return encoded + "1" * n_padding
+
 
 def decode_padded(encoded: str, table: Encoding) -> str:
     """Counterpat of decode, stripping of padding first"""
-    depadded = encoded
-    # TODO: Implement this
+    depadded = encoded.rstrip("1")
     return huffman_decode(depadded, table)
