@@ -58,11 +58,11 @@ def test_byte_aligned_encoding():
     msg = "Praesent fermentum tempor tellus.  Nunc porta vulputate tellus."
     # When I encode it for binary use
     table = huffman.huffman_table(huffman.charcounter_table(msg))
-    padded_encoded = huffman.encode_padded(msg, table)
+    padded_encoded = huffman.huffman_encode(msg, table, pad=True)
     # Then the encoded message is byte-aligned
     encoded_len = len(padded_encoded)
     assert encoded_len % 8 == 0, "Encoded message should be byte aligned"
     # When I decode it back
-    decoded = huffman.decode_padded(padded_encoded, table)
+    decoded = huffman.huffman_decode(padded_encoded, table)
     # Then the message is still identical to original
     assert decoded == msg, "Decoded message should be identical to original"
