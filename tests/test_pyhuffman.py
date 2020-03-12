@@ -50,3 +50,19 @@ def test_better_heuristics_better_performance():
     assert len(charfreq_encoding) < len(
         naive_encoding
     ), "Naive encoding shouldn't win here"
+
+
+def test_byte_aligned_encoding():
+    """ Scenario: Encoding and decoding with padding"""
+    # Given a sample message
+    msg = "Praesent fermentum tempor tellus.  Nunc porta vulputate tellus."
+    # When I encode it for binary use
+    table = huffman.huffman_table(huffman.charcounter_table(msg))
+    padded_encoded = huffman.encode_padded(msg, table)
+    # Then the encoded message is byte-aligned
+    encoded_len = len(padded_encoded)
+    assert encoded_len % 8 == 0, "Encoded message should be byte aligned"
+    # When I decode it back
+    decoded = huffman.decode_padded(padded_encoded, table)
+    # Then the message is still identical to original
+    assert decoded == msg, "Decoded message should be identical to original"
