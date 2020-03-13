@@ -34,7 +34,10 @@ You can run the tests via pytest:
 	make test
 
 Or use the implementation as a library. See the `tests/` folder
-for examples using the library.
+for examples using the library. See the documentation by running
+
+	make docs docs-serve
+and following the provided link
 
 The code formatter can be run via
 
@@ -46,7 +49,7 @@ and the python linters are all available via:
 
 We recommend you run all these commands together as a matter of routine:
 
-	make install format lint test
+	make install format lint docs test
 	# conveniently aliased as:
 	make
 
