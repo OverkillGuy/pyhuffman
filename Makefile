@@ -10,14 +10,5 @@ test:
 format:
 	poetry run black src/ tests/
 
-
-lint: isort mypy flake8
-
-mypy:
-	poetry run mypy src/ tests/
-
-flake8:
-	poetry run flake8 src/
-
-isort:
-	poetry run isort -rc src/ tests/
+lint:
+	pre-commit run --all --all-files

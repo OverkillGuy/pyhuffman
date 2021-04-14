@@ -1,0 +1,49 @@
+repos:
+# Generic checks
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.4.0
+    hooks:
+    -   id: trailing-whitespace
+    -   id: end-of-file-fixer
+    -   id: check-added-large-files
+    -   id: check-executables-have-shebangs
+    -   id: check-case-conflict
+    -   id: check-vcs-permalinks
+    -   id: forbid-new-submodules
+    -   id: mixed-line-ending
+    -   id: check-merge-conflict
+    -   id: detect-private-key
+    -   id: check-toml
+# Python specific linters/formatters, running inside poetry:
+-   repo: local
+    hooks:
+      - id: black
+        name: Black (python formatter)
+        entry: poetry run black
+        language: system
+        types: [python]
+        require_serial: true
+-   repo: local
+    hooks:
+      - id: isort
+        name: isort (python import sorter)
+        entry: poetry run isort
+        language: system
+        types: [python]
+        require_serial: true
+-   repo: local
+    hooks:
+    -   id: mypy
+        name: mypy
+        entry: poetry run mypy src/
+        types: [python]
+        language: system  # force running outside venv to find poetry
+        pass_filenames: False
+-   repo: local
+    hooks:
+    -   id: flake8
+        name: flake8
+        entry: poetry run flake8 src/
+        types: [python]
+        language: system
+        pass_filenames: False  # folder specified in "entry"
