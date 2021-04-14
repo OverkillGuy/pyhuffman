@@ -10,13 +10,14 @@ test:
 format:
 	poetry run black src/ tests/
 
-lint: isort mypy pylint
+
+lint: isort mypy flake8
 
 mypy:
 	poetry run mypy src/ tests/
 
-pylint:
-	poetry run pylint src/ tests/
+flake8:
+	poetry run flake8 src/
 
 isort:
 	poetry run isort -rc src/ tests/

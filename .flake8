@@ -1,0 +1,5 @@
+[flake8]
+# Black adds a space at end of complex slice, causing spurious
+# flake8 E203.
+# See https://github.com/psf/black/issues/1859#issuecomment-739061362
+ignore = E203
