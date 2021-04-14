@@ -1,5 +1,10 @@
 """
 Simple tests for huffman encoding
+
+Feature: Huffman coding
+In order to send more messages per second
+As a network engineer
+I want to encode messages using Huffman coding
 """
 
 from pyhuffman import huffman
