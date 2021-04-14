@@ -1,4 +1,4 @@
-# PyHuffman - Toy implementation of Huffman coding 
+# PyHuffman - Toy implementation of Huffman coding
 
 A Python program implementing Huffman coding for learning purposes using Python best-practices.
 
@@ -49,6 +49,8 @@ We recommend you run all these commands together as a matter of routine:
 	make install format lint test
 	# conveniently aliased as:
 	make
+
+This project uses [pre-commit](https://pre-commit.com) to run lint checks.
 
 ## License
 

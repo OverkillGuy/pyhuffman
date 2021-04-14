@@ -1,3 +1,1 @@
-"""
-A toy implementation of Huffman coding.
-"""
+"""A toy implementation of Huffman coding."""

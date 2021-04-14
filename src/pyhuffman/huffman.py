@@ -1,6 +1,4 @@
-"""
-Huffman encoding implementation
-"""
+"""Huffman encoding implementation."""
 
 from collections import Counter
 from typing import Dict, Optional
@@ -13,7 +11,14 @@ Encoding = Dict[str, str]
 
 
 def huffman_table(symbols_probas: SymbolTable) -> Encoding:
-    """ Computes the huffman encoding table for given symbols/proba pairs"""
+    """Compute the huffman encoding table for given symbols/proba pairs.
+
+    Args:
+        symbols_probas: Dictionary mapping a symbol to its probability ∈ [0-1].
+
+    Returns:
+        Encoding dictionary mapping symbol to its encoded version
+    """
     encoding_order = []
     symbols_acc = symbols_probas
     while symbols_probas:  # Pick off highest probability until exhaustion
@@ -30,8 +35,19 @@ def huffman_table(symbols_probas: SymbolTable) -> Encoding:
     return encoding
 
 
-def huffman_encode(message: str, table: Encoding, pad: Optional[bool] = None) -> str:
-    """ Encode a message with huffman encoding"""
+def huffman_encode(
+    message: str, table: Encoding, pad: Optional[bool] = None
+) -> str:
+    """Encode a message with huffman encoding.
+
+    Args:
+        message: The message payload to encode
+        table: The encoding table to use for encoding. See `huffman_table`.
+        pad: Optionally pad the output by zeroes to byte-align the output
+
+    Returns:
+        Encoded binary as a string
+    """
     # just a lookup table, really
     encoded = "".join([table[c] for c in message])
     if pad:
@@ -44,7 +60,15 @@ def huffman_encode(message: str, table: Encoding, pad: Optional[bool] = None) ->
 
 
 def huffman_decode(encoded: str, table: Encoding) -> str:
-    """ Decode a message encoded with huffman"""
+    """Decode a message encoded with huffman encoding.
+
+    Args:
+        encoded: The encoded message as binary string.
+        table: The encoding table used for encoding/decoding.
+
+    Returns:
+        The decoded message as a string.
+    """
     # will want encoded-to-decoded lookup table
     # = reverse the decoded-to-encoded table
     reversed_table = {v: k for k, v in table.items()}
@@ -64,10 +88,20 @@ def huffman_decode(encoded: str, table: Encoding) -> str:
 
 
 def equiprobable_table(sample_message: str) -> SymbolTable:
-    """Generate a huffman symbol table using a naive heuristic
+    """Generate a huffman symbol table using a naive heuristic.
 
     Heuristic is to assume that characters are all equally likely to
     occur in given message
+
+    Args:
+        sample_message: A statistically representative sample of the kind of
+            message we'll be encoding, used only to sample symbol (characters)
+            list
+
+    Returns:
+        A symbol table using equi-probable symbols aka each symbol has 1/N
+            proba, with N number of distinct characters used in the sample
+            message.
     """
     unique_characters = set(sample_message)
     probability_of_character = 1.0 / len(unique_characters)
@@ -75,9 +109,18 @@ def equiprobable_table(sample_message: str) -> SymbolTable:
 
 
 def charcounter_table(sample_message: str) -> SymbolTable:
-    """Generate a huffman symbol table using a char-frequency heuristic
+    """Generate a huffman symbol table using a char-frequency heuristic.
 
-    Using character frequency to figure out how probable a character is
+    Using character frequency to figure out how probable a character is.
+
+    Args:
+        sample_message: A statistically representative sample of the kind of
+            message we'll be encoding, used to sample symbol (character)
+            frequency.
+
+    Returns:
+        A symbol table using inverse-symbol-frequency.
     """
-    # Counter returns a custom object mapping item to item-frequency in a collection
+    # Counter returns a custom object mapping item to item-frequency
+    # in a collection
     return dict(Counter(sample_message))
