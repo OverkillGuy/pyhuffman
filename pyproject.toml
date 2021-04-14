@@ -24,3 +24,6 @@ darglint = "^1.8.0"
 [build-system]
 requires = ["poetry>=0.12"]
 build-backend = "poetry.masonry.api"
+
+[tool.black]
+line-length = 79
